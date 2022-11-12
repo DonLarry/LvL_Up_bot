@@ -59,10 +59,10 @@ def _get_roles_by_level(level):
 async def _update_member(member_data, get_member_function, log_function):
     member_id = member_data[0]
     if member_id == owner_id:
-        return
+        return False
     member = get_member_function(member_id)
     if member is None:
-        return
+        return False
     old_role, new_role = _get_roles_by_level(member_data[1])
     # print()
     # print(member.roles)
@@ -74,14 +74,18 @@ async def _update_member(member_data, get_member_function, log_function):
             print(f'Removing role {old_role.name} from {member.mention}...')
             await log_function(f'Removing role {old_role.name} from {member.mention}...')
             await member.remove_roles(old_role, reason='New level role (replacing old one)')
+        return True
+    return False
 
 
 async def update_member_levels(get_member_function, log_function):
     member_levels = _get_member_levels()
+    updated_levels = 0
     # print(f'Member levels: {member_levels}')
     for member_data in member_levels:
         # print(member_data)
-        await _update_member(member_data, get_member_function, log_function)
+        updated_levels += await _update_member(member_data, get_member_function, log_function)
+    return updated_levels
 
 
 def _allowed_role(member):

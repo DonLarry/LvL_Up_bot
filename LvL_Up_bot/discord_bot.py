@@ -82,8 +82,12 @@ def discord_bot():
         send_function = bot.logs_channel.send
         if 'DEBUG' in kwargs and kwargs['DEBUG']:
             send_function = ctx.send
-        await send_function('Updating levels...')
-        await update_member_levels(bot.get_guild(server_id).get_member, send_function)
-        print('Done!')
-        await send_function('Done!')
+        await send_function('Checking levels...')
+        updated_roles = await update_member_levels(bot.get_guild(server_id).get_member, send_function)
+        if not updated_roles:
+            message = 'No level roles to update'
+        else:
+            message = f'Done, **{updated_roles}** level role{"s"*(updated_roles>1)} updated.'
+        print(message)
+        await send_function(message)
     return bot
