@@ -5,7 +5,7 @@ from discord.ext import commands
 
 from utils import update_member_levels, allowed_member
 
-from config import server_id, roles_by_level, logs_channel_id
+from settings import server_id, roles_by_level, logs_channel_id
 
 
 class Bot(commands.Bot):

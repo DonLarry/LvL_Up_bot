@@ -3,7 +3,7 @@ from discord import Member
 
 import requests
 
-from config import server_id, min_level_role, roles_by_level, allowed_users, allowed_roles, owner_id
+from settings import server_id, min_level_role, roles_by_level, allowed_users, allowed_roles, owner_id, MEE6_TOKEN
 
 
 def _get_member_data(player):
@@ -23,9 +23,8 @@ def _add_members(members, players):
 
 
 def _get_member_levels():
-    mee6_token = os.getenv('MEE6_TOKEN')
     url = f'https://mee6.xyz/api/plugins/levels/leaderboard/{server_id}'
-    headers = {'authorization': mee6_token}
+    headers = {'authorization': MEE6_TOKEN}
     members = []
     # _add_members(members, requests.get(url, headers=headers).json()['players'])
     page = 0
@@ -97,9 +96,6 @@ def allowed_member(member):
 
 
 if __name__ == '__main__':
-    import os
-    from dotenv import load_dotenv
-    load_dotenv()
     member_levels = _get_member_levels()
     print(f'Possible members: {len(member_levels)}')
     import code

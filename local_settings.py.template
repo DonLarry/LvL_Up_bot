@@ -1,0 +1,50 @@
+# Uncomment for debug mode
+# DEBUG = True
+
+# Using the testing server or not
+USE_TESTING_SERVER = True
+
+server_id = 1234567890123456789
+min_level_role = 1
+roles_by_level = [
+    (1, 1234567890123456789),
+    (2, 1234567890123456789),
+    (3, 1234567890123456789),
+    (4, 1234567890123456789),
+    (5, 1234567890123456789),
+    (6, 1234567890123456789),
+    (7, 1234567890123456789),
+    (8, 1234567890123456789),
+    (9, 1234567890123456789),
+    (10, 1234567890123456789),
+]
+owner_id = 1234567890123456789
+allowed_users = {
+    1234567890123456789,
+}
+allowed_roles = {
+    -1 # No specific role allowed
+}
+logs_channel_id = 1234567890123456789
+
+# TESTING SERVER DATA
+if USE_TESTING_SERVER:
+    server_id = 1234567890123456789
+    min_level_role = 1
+    roles_by_level = [
+        (1, 1234567890123456789),
+        (3, 1234567890123456789),
+        (6, 1234567890123456789),
+    ]
+    allowed_users = {
+        -1, # No specific user allowed
+    }
+    allowed_roles = {
+        1234567890123456789,
+    }
+    logs_channel_id = 1234567890123456789
+
+# TOKENS
+MEE6_TOKEN = "MEE6 SECRET TOKEN!"
+DISCORD_BOT_TOKEN_TEST = "TESTING BOT SECRET TOKEN!"
+DISCORD_BOT_TOKEN = "BOT SECRET TOKEN!"
