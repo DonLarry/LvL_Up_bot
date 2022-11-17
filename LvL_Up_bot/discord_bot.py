@@ -78,7 +78,7 @@ def discord_bot():
             print('Usage: `lv.update roles`')
             await ctx.send('Usage: `lv.update roles`')
             return
-        print('Updating levels...')
+        print('Checking levels...')
         send_function = bot.logs_channel.send
         if 'DEBUG' in kwargs and kwargs['DEBUG']:
             send_function = ctx.send
