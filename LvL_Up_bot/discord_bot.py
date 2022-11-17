@@ -75,8 +75,8 @@ def discord_bot():
     async def update(ctx, *args, **kwargs):
         options = {'roles'}
         if len(args) != 1 or args[0] not in options:
-            print('Usage: `lvl.update roles`')
-            await ctx.send('Usage: `lvl.update roles`')
+            print('Usage: `lv.update roles`')
+            await ctx.send('Usage: `lv.update roles`')
             return
         print('Updating levels...')
         send_function = bot.logs_channel.send
