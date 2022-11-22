@@ -5,7 +5,7 @@ from discord.ext import commands
 
 from utils import update_member_levels, allowed_member, get_levelup_data, auto_levelup
 
-from settings import server_id, roles_by_level, logs_channel_id, dev_id, mee6_id
+from settings import server_id, roles_by_level, logs_channel_id, dev_id, mee6_id, min_level_role
 
 
 class Bot(commands.Bot):
@@ -66,7 +66,7 @@ def discord_bot():
         # TODO: check also on config.py the other todos.
         if message.author.id == mee6_id:
             member_data = get_levelup_data(message)
-            if member_data:
+            if member_data and member_data[1]>=min_level_role:
                 get_member_function = bot.get_guild(server_id).get_member
                 log_function = bot.logs_channel.send
                 await auto_levelup(member_data, get_member_function, log_function)
