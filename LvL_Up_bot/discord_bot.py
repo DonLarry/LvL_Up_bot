@@ -50,10 +50,14 @@ def discord_bot():
             roles_by_level[i] = (id, guild.get_role(role_id))
         print(f'Roles: {roles_by_level}')
         bot.logs_channel = guild.get_channel(logs_channel_id)
-        # TODO: after doing the function to update the levels by listening for mee6 levelup messages,
-        #       do the following things:
-        #       1. update member levels every time on_ready is executed
-        #       2. delete the update command, so the bot automatically updates the levels
+
+        # Auto-update
+        send_function = bot.logs_channel.send
+        updated_roles = await update_member_levels(bot.get_guild(server_id).get_member, send_function)
+        if updated_roles:
+            message = f'**{updated_roles}** level role{"s"*(updated_roles>1)} automatically updated while turning on.'
+            print(message)
+            await send_function(message)
 
     @bot.event
     async def on_message(message):
