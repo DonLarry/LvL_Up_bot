@@ -53,6 +53,7 @@ def _get_roles_by_level(level):
 
 
 async def _update_member(member_data: tuple[int, int], get_member_function, log_function):
+    """Tries to update member level. Returns True if level was updated, False otherwise"""
     member_id = member_data[0]
     if member_id == owner_id:
         return False
