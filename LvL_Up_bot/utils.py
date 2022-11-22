@@ -1,6 +1,3 @@
-import os
-from discord import Member
-
 import requests
 
 from settings import server_id, min_level_role, roles_by_level, allowed_users, allowed_roles, owner_id, MEE6_TOKEN
@@ -26,7 +23,6 @@ def _get_member_levels():
     url = f'https://mee6.xyz/api/plugins/levels/leaderboard/{server_id}'
     headers = {'authorization': MEE6_TOKEN}
     members = []
-    # _add_members(members, requests.get(url, headers=headers).json()['players'])
     page = 0
     while True:
         response = requests.get(url, headers=headers, params={'page': page})
@@ -64,8 +60,6 @@ async def _update_member(member_data, get_member_function, log_function):
     if member is None:
         return False
     old_role, new_role = _get_roles_by_level(member_data[1])
-    # print()
-    # print(member.roles)
     if new_role not in member.roles:
         print(f'Adding role {new_role.name} to {member.mention}...')
         await log_function(f'Adding role {new_role.name} to {member.mention}...')
@@ -81,9 +75,7 @@ async def _update_member(member_data, get_member_function, log_function):
 async def update_member_levels(get_member_function, log_function):
     member_levels = _get_member_levels()
     updated_levels = 0
-    # print(f'Member levels: {member_levels}')
     for member_data in member_levels:
-        # print(member_data)
         updated_levels += await _update_member(member_data, get_member_function, log_function)
     return updated_levels
 

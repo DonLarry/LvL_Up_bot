@@ -5,7 +5,7 @@ from discord.ext import commands
 
 from utils import update_member_levels, allowed_member
 
-from settings import server_id, roles_by_level, logs_channel_id
+from settings import server_id, roles_by_level, logs_channel_id, dev_id
 
 
 class Bot(commands.Bot):
@@ -16,7 +16,7 @@ class Bot(commands.Bot):
         async def wrapper_decorator(*args, **kwargs):
             ctx = args[0]
             if ctx.guild is None or ctx.guild.id != server_id:
-                if ctx.author.id == 668439228430155816:
+                if ctx.author.id == dev_id:
                     kwargs['DEBUG'] = True
                     return await func(*args, **kwargs)
                 return

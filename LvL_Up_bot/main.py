@@ -1,5 +1,3 @@
-import os
-
 from discord_bot import discord_bot
 
 from settings import DISCORD_BOT_TOKEN
