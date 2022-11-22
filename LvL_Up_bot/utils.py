@@ -61,16 +61,16 @@ async def _update_member(member_data: tuple[int, int], get_member_function, log_
     if member is None:
         return False
     old_role, new_role = _get_roles_by_level(member_data[1])
-    if new_role not in member.roles:
-        print(f'Adding role {new_role.name} to {member.mention}...')
-        await log_function(f'Adding role {new_role.name} to {member.mention}...')
-        await member.add_roles(new_role)
-        if old_role is not None:
-            print(f'Removing role {old_role.name} from {member.mention}...')
-            await log_function(f'Removing role {old_role.name} from {member.mention}...')
-            await member.remove_roles(old_role, reason='New level role (replacing old one)')
-        return True
-    return False
+    if new_role in member.roles:
+        return False
+    print(f'Adding role {new_role.name} to {member.mention}...')
+    await log_function(f'Adding role {new_role.name} to {member.mention}...')
+    await member.add_roles(new_role)
+    if old_role is not None:
+        print(f'Removing role {old_role.name} from {member.mention}...')
+        await log_function(f'Removing role {old_role.name} from {member.mention}...')
+        await member.remove_roles(old_role, reason='New level role (replacing old one)')
+    return True
 
 
 async def update_member_levels(get_member_function, log_function):
