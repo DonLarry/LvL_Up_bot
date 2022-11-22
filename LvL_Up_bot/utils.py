@@ -3,7 +3,7 @@ import requests
 from settings import server_id, min_level_role, roles_by_level, allowed_users, allowed_roles, owner_id, MEE6_TOKEN
 
 
-def _get_member_data(player):
+def _get_member_data(player) -> tuple[int, int]:
     return (
         int(player['id']),
         player['level'],
@@ -52,7 +52,7 @@ def _get_roles_by_level(level):
     return roles_by_level[i-1][1], roles_by_level[i][1]
 
 
-async def _update_member(member_data, get_member_function, log_function):
+async def _update_member(member_data: tuple[int, int], get_member_function, log_function):
     member_id = member_data[0]
     if member_id == owner_id:
         return False
