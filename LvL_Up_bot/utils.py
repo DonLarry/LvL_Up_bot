@@ -103,6 +103,13 @@ def get_levelup_data(message) -> tuple[int, int]:
         return
 
 
+async def auto_levelup(member_data, get_member_function, log_function):
+    updated = await _update_member(member_data, get_member_function, log_function)
+    if updated:
+        print('_automatically updated_')
+        await log_function('_automatically updated_')
+
+
 if __name__ == '__main__':
     member_levels = _get_member_levels()
     print(f'Possible members: {len(member_levels)}')
