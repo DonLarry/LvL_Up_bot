@@ -92,6 +92,17 @@ def allowed_member(member):
     return member.id in allowed_users or _allowed_role(member)
 
 
+def get_levelup_data(message) -> tuple[int, int]:
+    """If message is lvlup message, returns member data, None otherwise"""
+    try:
+        _, mention, *_, num, _ = message.content.split()
+        member_id = int(mention[2:-1])
+        level = int(num[:-1])
+        return member_id, level
+    except:
+        return
+
+
 if __name__ == '__main__':
     member_levels = _get_member_levels()
     print(f'Possible members: {len(member_levels)}')
